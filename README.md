@@ -1,2 +1,2 @@
-# 09-Juicy-Breakout
-This is my updated, or juicy, version of Breakout.
+# Project-Template-Godot
+A generic template for a Godot project
