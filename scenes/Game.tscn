@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Paddle.gd" type="Script" id=2]
@@ -6,9 +6,40 @@
 [ext_resource path="res://Scripts/Score.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Lives.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Starting.gd" type="Script" id=6]
+[ext_resource path="res://Assets/James Hammond - Welcome To Chip City.wav" type="AudioStream" id=7]
+[ext_resource path="res://Assets/New Piskel.png" type="Texture" id=8]
+[ext_resource path="res://Assets/pink-background.jpg.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 72, 16 )
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.222222, 0.340741, 0.562963, 0.822222 )
+colors = PoolColorArray( 0.984375, 0.665222, 0.665222, 1, 0.929688, 0.584686, 0.63452, 1, 1, 1, 1, 1, 0.8039, 0.433353, 0.486876, 1, 0.988281, 0.532745, 0.598545, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0.0622398, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.834758, 0.3944 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 2
+emission_box_extents = Vector3( 100, 10, 1 )
+flag_disable_z = true
+spread = 100.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity_random = 1.0
+angular_velocity = 500.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle_random = 1.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 6 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -34,13 +65,11 @@ margin_bottom = 16.0
 shape = SubResource( 1 )
 
 [node name="Wall" type="StaticBody2D" parent="."]
-editor/display_folded = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall"]
 polygon = PoolVector2Array( 0, 632, 0, 0, 1024, 0, 1024, 632, 1064, 632, 1064, -40, -48, -40, -48, 632 )
 
 [node name="Tiles" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="Tile Row 1" type="Node2D" parent="Tiles"]
 editor/display_folded = true
@@ -224,12 +253,95 @@ text = "Lives:"
 script = ExtResource( 5 )
 
 [node name="Starting" type="Label" parent="."]
-margin_right = 1024.0
-margin_bottom = 112.0
+margin_left = 10.0
+margin_top = 2.05701
+margin_right = 1034.0
+margin_bottom = 114.057
 align = 1
 valign = 1
 script = ExtResource( 6 )
 
 [node name="Timer" type="Timer" parent="Starting"]
 wait_time = 10.0
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+autoplay = true
+
+[node name="Particles" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="PinkRain" type="Particles2D" parent="Particles"]
+position = Vector2( 100, 20 )
+amount = 10
+lifetime = 1.35
+randomness = 1.0
+process_material = SubResource( 2 )
+texture = ExtResource( 8 )
+
+[node name="PinkRain2" type="Particles2D" parent="Particles"]
+position = Vector2( 240, 20 )
+amount = 10
+lifetime = 1.35
+randomness = 1.0
+process_material = SubResource( 2 )
+texture = ExtResource( 8 )
+
+[node name="PinkRain3" type="Particles2D" parent="Particles"]
+position = Vector2( 380, 20 )
+amount = 10
+lifetime = 1.35
+randomness = 1.0
+process_material = SubResource( 2 )
+texture = ExtResource( 8 )
+
+[node name="PinkRain4" type="Particles2D" parent="Particles"]
+position = Vector2( 530, 20 )
+amount = 10
+lifetime = 1.35
+randomness = 1.0
+process_material = SubResource( 2 )
+texture = ExtResource( 8 )
+
+[node name="PinkRain5" type="Particles2D" parent="Particles"]
+position = Vector2( 680, 20 )
+amount = 10
+lifetime = 1.35
+randomness = 1.0
+process_material = SubResource( 2 )
+texture = ExtResource( 8 )
+
+[node name="PinkRain6" type="Particles2D" parent="Particles"]
+position = Vector2( 810, 20 )
+amount = 10
+lifetime = 1.35
+randomness = 1.0
+process_material = SubResource( 2 )
+texture = ExtResource( 8 )
+
+[node name="PinkRain7" type="Particles2D" parent="Particles"]
+position = Vector2( 910, 20 )
+amount = 10
+lifetime = 1.35
+randomness = 1.0
+process_material = SubResource( 2 )
+texture = ExtResource( 8 )
+
+[node name="Background" type="Node" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Background/ParallaxBackground/ParallaxLayer"]
+position = Vector2( 512, 320 )
+scale = Vector2( 1.62919, 1.42256 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
 [connection signal="timeout" from="Starting/Timer" to="Starting" method="_on_Timer_timeout"]
